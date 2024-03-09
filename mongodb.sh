@@ -2,6 +2,10 @@
 
 ruser=$(id -u)
 
+TIMESTAMP=$(date +%F-%H-%M-%S)
+
+LOGFILE="/tmp/$0-$TIMESTAMP.log"
+
 
 VALIDATE() {
 
@@ -23,18 +27,26 @@ else
     echo "You are root user"
 fi
 
-cp mango.repo /etc/yum.repos.d/mongo.repo
+cp mango.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 
 VALIDATE $? "Copied mongodb repo"
 
-dnf install mongodb-org -y 
+dnf install mongodb-org -y &>> $LOGFILE
 
 VALIDATE $? "mangodb installation"
 
-systemctl enable mongod
+systemctl enable mongod &>> $LOGFILE
 
 VALIDATE $? "enabling mangodb" 
 
-systemctl start mongod
+systemctl start mongod &>> $LOGFILE
 
 VALIDATE $? "mangodb started"
+
+sed -i 's/127.0.0.0/0.0.0.0/g' /etc/mongod.conf &>> $LOGFILE
+
+VALIDATE $? "file edited for remote access"
+
+systemctl restart mongod &>> $LOGFILE
+
+VALIDATE $? "mangodb resrted"
