@@ -15,9 +15,7 @@ then
     exit 1
 else
     echo -e "$2 is \e[32m sucess"
-elif
-then
-    echo -e "$3 is \e[33m  already installed"
+
 fi
 
 }
@@ -36,7 +34,7 @@ VALIDATE $? "Copied mongodb repo"
 
 dnf install mongodb-org -y &>> $LOGFILE
 
-VALIDATE $? "mangodb installation" "mangodb"
+VALIDATE $? "mangodb installation" 
 
 systemctl enable mongod &>> $LOGFILE
 
