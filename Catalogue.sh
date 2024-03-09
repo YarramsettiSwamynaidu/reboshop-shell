@@ -40,12 +40,12 @@ VALIDATE $? "installing nodejs"
 
 id roboshop
 
-if [ $? -ne 0]
+if [ $? -ne 0 ]
 then
     useradd roboshop &>> $LOGFILE
     VALIDATE $? "roboshop user created"
 else
-    echo -e "roboshop user e\[33m already existed"
+    echo -e "roboshop user \e[33m already existed"
 fi
 
 mkdir -p /app &>> $LOGFILE
@@ -74,7 +74,7 @@ VALIDATE $? "enabled catalogue"
 systemctl start catalogue &>> $LOGFILE
 VALIDATE $? "started catalogue"
 
-cp mango.repo /etc/yum.repos.d/mango.repo &>> $LOGFILE
+cp /home/centos/reboshop-shell/mango.repo /etc/yum.repos.d/mango.repo &>> $LOGFILE
 VALIDATE $? "mongodb repo copied"
 
 dnf install mongodb-org-shell -y
