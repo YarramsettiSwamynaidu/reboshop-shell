@@ -38,10 +38,17 @@ VALIDATE $? "enagbled nodejs:18V"
 dnf install nodejs -y &>> $LOGFILE
 VALIDATE $? "installing nodejs"
 
-useradd roboshop &>> $LOGFILE
-VALIDATE $? "roboshop user created"
+id roboshop
 
-mkdir /app &>> $LOGFILE
+if [ $? -ne 0]
+then
+    useradd roboshop &>> $LOGFILE
+    VALIDATE $? "roboshop user created"
+else
+    echo -e "roboshop user e\[33m already existed"
+fi
+
+mkdir -p /app &>> $LOGFILE
 VALIDATE $? "app directory cretaed" 
 
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $LOGFILE
@@ -49,7 +56,7 @@ VALIDATE $? "downloding Zip file"
 
 cd /app 
 
-unzip /tmp/catalogue.zip &>> $LOGFILE
+unzip -o /tmp/catalogue.zip &>> $LOGFILE
 VALIDATE $? "Unziped file"
 
 npm install &>> $LOGFILE
