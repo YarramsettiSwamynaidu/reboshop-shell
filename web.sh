@@ -48,7 +48,7 @@ VALIDATE $? "to go html path"
 unzip -p /tmp/web.zip &>> $LOGFILE
 VALIDATE $? "flie unziped"
 
-cp /home/centos/roboshop /etc/nginx/default.d/roboshop.conf &>> $LOGFILE
+cp /home/centos/reboshop-shell/roboshop /etc/nginx/default.d/roboshop.conf &>> $LOGFILE
 VALIDATE $? "file copied"
 
 systemctl restart nginx &>> $LOGFILE
