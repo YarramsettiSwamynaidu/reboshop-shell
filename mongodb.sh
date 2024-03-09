@@ -15,7 +15,7 @@ then
     exit 1
 else
     echo -e "$2 is \e[32m sucess"
-else if
+elif
     echo -e "$3 is \e[33m  already installed"
 fi
 
