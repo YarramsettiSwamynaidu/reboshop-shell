@@ -39,8 +39,7 @@ VALIDATE $? "nginx started"
 rm -rf /usr/share/nginx/html/* &>> $LOGFILE
 VALIDATE $? "defult file removed"
 
-curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip" &>> $LOGFILE
-
+curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip
 VALIDATE $? "Download the frontend content"
 
 cd /usr/share/nginx/html &>> $LOGFILE
