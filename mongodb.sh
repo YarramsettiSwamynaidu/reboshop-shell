@@ -15,6 +15,8 @@ then
     exit 1
 else
     echo -e "$2 is \e[32m sucess"
+else if
+    echo -e "$3 is \e[33m  already installed"
 fi
 
 }
@@ -29,11 +31,11 @@ fi
 
 cp mango.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 
-VALIDATE $? "Copied mongodb repo"
+VALIDATE $? "Copied mongodb repo" 
 
 dnf install mongodb-org -y &>> $LOGFILE
 
-VALIDATE $? "mangodb installation"
+VALIDATE $? "mangodb installation" "mangodb"
 
 systemctl enable mongod &>> $LOGFILE
 
@@ -43,7 +45,7 @@ systemctl start mongod &>> $LOGFILE
 
 VALIDATE $? "mangodb started"
 
-sed -i 's/127.0.0.0/0.0.0.0/g' /etc/mongod.conf &>> $LOGFILE
+sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>> $LOGFILE
 
 VALIDATE $? "file edited for remote access"
 
