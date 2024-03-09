@@ -42,13 +42,13 @@ VALIDATE $? "defult file removed"
 curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip
 VALIDATE $? "Download the frontend content"
 
-cd /usr/share/nginx/html &>> $LOGFILE
+cd /usr/share/nginx/html 
 VALIDATE $? "to go html path"
 
 unzip -p /tmp/web.zip &>> $LOGFILE
 VALIDATE $? "flie unziped"
 
-cp /home/centos/reboshop-shell/roboshop /etc/nginx/default.d/roboshop.conf &>> $LOGFILE
+cp /home/centos/reboshop-shell/roboshop.conf /etc/nginx/default.d/roboshop.conf 
 VALIDATE $? "file copied"
 
 systemctl restart nginx &>> $LOGFILE
