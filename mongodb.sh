@@ -16,6 +16,7 @@ then
 else
     echo -e "$2 is \e[32m sucess"
 elif
+then
     echo -e "$3 is \e[33m  already installed"
 fi
 
